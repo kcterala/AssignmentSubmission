@@ -2,6 +2,7 @@ package com.kcterala.AssigmentSubmissionApp.controller;
 
 import com.kcterala.AssigmentSubmissionApp.entity.Assignment;
 import com.kcterala.AssigmentSubmissionApp.entity.User;
+import com.kcterala.AssigmentSubmissionApp.model.AssignmentResponse;
 import com.kcterala.AssigmentSubmissionApp.service.AssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.ast.Assign;
@@ -35,7 +36,8 @@ public class AssignmentController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getAssignmentById(@PathVariable long id, @AuthenticationPrincipal User user){
         Optional<Assignment> assignmentOpt = assignmentService.findById(id);
-        return ResponseEntity.ok(assignmentOpt.orElse(new Assignment()));
+        AssignmentResponse assignmentResponse = new AssignmentResponse(assignmentOpt.orElse(new Assignment()));
+        return ResponseEntity.ok(assignmentResponse);
     }
 
     @PutMapping("/{id}")
