@@ -1,5 +1,8 @@
 package com.kcterala.AssigmentSubmissionApp.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum AssignmentEnum {
     ASSIGNMENT_1(1, "HTML Assignment"),
     ASSIGNMENT_2(2, "Guessing Game"),
