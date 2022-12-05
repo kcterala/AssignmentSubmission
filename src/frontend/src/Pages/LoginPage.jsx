@@ -26,7 +26,7 @@ function LoginPage() {
       .then(([body, data]) => {
         const token = data.get("authorization");
         setJwt(token);
-        window.location.href = "/";
+        window.location.href = "/dashboard";
       });
   }
 

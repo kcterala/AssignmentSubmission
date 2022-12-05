@@ -11,6 +11,7 @@ import {
 import fetchService from "../services/fetchService";
 import useLocalState from "../useLocalStorage";
 import { Form, Col, Row, DropdownButton } from "react-bootstrap";
+import { useRef } from "react";
 
 const Assignment = () => {
   const assignmentId = window.location.href.split("/assignments/")[1];
@@ -18,8 +19,11 @@ const Assignment = () => {
   const [assignment, setAssignment] = useState({
     branch: "",
     githubUrl: "",
+    number: null,
+    status: null,
   });
   const [assignmentEnums, setAssignmentEnums] = useState([]);
+  const [assignmentStatuses, setAssignmentStatuses] = useState([]);
 
   useEffect(() => {
     fetchService(
@@ -32,8 +36,12 @@ const Assignment = () => {
       if (assignmentData.githubUrl === null) assignmentData.githubUrl = "";
       setAssignment(assignmentData);
       setAssignmentEnums(assignmentRes.assignmentEnum);
+      setAssignmentStatuses(assignmentRes.statusEnums);
     });
   }, []);
+
+  const prevAssignmentValue = useRef(assignment);
+  // console.log(prevAssignmentValue);
 
   function updateAssignment(prop, value) {
     const newAssignment = { ...assignment };
@@ -42,20 +50,35 @@ const Assignment = () => {
   }
 
   function save() {
+    if (assignment.status === assignmentStatuses[0].status) {
+      updateAssignment("status", assignmentStatuses[1].status);
+    } else {
+      persist();
+    }
+    // .then((window.location.href = `/`));
+  }
+
+  function persist() {
     fetchService(
       `http://localhost:8080/api/assignments/${assignmentId}`,
       "put",
       jwt,
       assignment
-    )
-      .then((data) => setAssignment(data))
-      .then((window.location.href = `/`));
+    ).then((data) => setAssignment(data));
   }
+
+  useEffect(() => {
+    if (prevAssignmentValue.current.status !== assignment.status) {
+      persist();
+    }
+    prevAssignmentValue.current = assignment;
+  }, [assignment]);
+
   return (
     <Container className="mt-5">
       <Row className="d-flex align-items-center">
         <Col>
-          <h1>Assignment {assignmentId}</h1>
+          {assignment.number ? <h1>Assignment {assignment.number}</h1> : ""}
         </Col>
         <Col>
           <Badge bg="danger" style={{ fontSize: "1rem" }}>
@@ -73,12 +96,21 @@ const Assignment = () => {
             <Col sm="9" md="8" lg="6">
               <DropdownButton
                 as={ButtonGroup}
-                id={`assignmentName`}
                 variant={"info"}
-                title={"Assignment 1"}
+                title={
+                  assignment.number
+                    ? `Assignment ${assignment.number}`
+                    : "Select an Assignment"
+                }
+                onSelect={(selectedElement) => {
+                  updateAssignment("number", selectedElement);
+                }}
               >
                 {assignmentEnums.map((e) => (
-                  <Dropdown.Item eventKey={e.assignmentNum}>
+                  <Dropdown.Item
+                    key={e.assignmentNum}
+                    eventKey={e.assignmentNum}
+                  >
                     {e.assignmentNum}
                   </Dropdown.Item>
                 ))}
@@ -91,7 +123,6 @@ const Assignment = () => {
             </Form.Label>
             <Col sm="9" md="8" lg="6">
               <Form.Control
-                id="githubUrl"
                 type="url"
                 onChange={(event) =>
                   updateAssignment("githubUrl", event.target.value)
@@ -107,7 +138,6 @@ const Assignment = () => {
             </Form.Label>
             <Col sm="9" md="8" lg="6">
               <Form.Control
-                id="branch"
                 type="text"
                 value={assignment.branch}
                 onChange={(e) => updateAssignment("branch", e.target.value)}
@@ -115,7 +145,17 @@ const Assignment = () => {
               />
             </Col>
           </Form.Group>
-          <Button onClick={() => save()}>Submit Assignment</Button>
+          <div className="d-flex gap-5">
+            <Button onClick={() => save()}>Submit Assignment</Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                window.location.href = "/";
+              }}
+            >
+              Back
+            </Button>
+          </div>
         </>
       ) : (
         <></>

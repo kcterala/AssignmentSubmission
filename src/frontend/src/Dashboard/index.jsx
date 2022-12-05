@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import fetchService from "../services/fetchService";
 import useLocalState from "../useLocalStorage";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Badge, Row, Col } from "react-bootstrap";
 
 const Dashboard = () => {
   const [jwt, setJwt] = useLocalState("", "jwt");
@@ -24,6 +24,20 @@ const Dashboard = () => {
   }
   return (
     <div style={{ margin: "2rem" }}>
+      <Row>
+        <Col>
+          <div
+            className="d-flex justify-content-end"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setJwt(null);
+              window.location.href = "/login";
+            }}
+          >
+            Logout
+          </div>
+        </Col>
+      </Row>
       <div className="mb-5">
         <Button size="lg" onClick={() => createAssignment()}>
           Submit new assignment
@@ -39,10 +53,13 @@ const Dashboard = () => {
           {assignments.map((assignment) => (
             <Card key={assignment.id} style={{ width: "18rem" }}>
               <Card.Body className="d-flex flex-column justify-content-around">
-                <Card.Title>Assignment #{assignment.id}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  {assignment.status}
-                </Card.Subtitle>
+                <Card.Title>Assignment #{assignment.number}</Card.Title>
+                <div className="d-flex align-items-start">
+                  <Badge bg="danger" style={{ fontSize: "0.8rem" }}>
+                    {assignment.status}
+                  </Badge>
+                </div>
+
                 <Card.Text>
                   <p>
                     <b>GitHub Url</b>: {assignment.githubUrl}

@@ -38,7 +38,7 @@ function App() {
       <Router>
         <Routes>
           <Route
-            path="/"
+            path="/dashboard"
             element={
               <PrivateRoute>
                 <Dashboard />
