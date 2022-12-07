@@ -3,6 +3,7 @@ package com.kcterala.AssigmentSubmissionApp.service;
 import com.kcterala.AssigmentSubmissionApp.entity.Assignment;
 import com.kcterala.AssigmentSubmissionApp.entity.User;
 import com.kcterala.AssigmentSubmissionApp.enums.AssignmentStatusEnum;
+import com.kcterala.AssigmentSubmissionApp.enums.AuthorityEnum;
 import com.kcterala.AssigmentSubmissionApp.repository.AssignmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,10 @@ public class AssignmentService {
     }
 
     public Set<Assignment> getAssignments(User user) {
+        boolean isCodeReviewer = user.getAuthorities().stream().filter(auth-> AuthorityEnum.ROLE_CODE_REVIEWER.name().equals(auth.getAuthority())).count() > 0;
+        if(isCodeReviewer){
+            return assignmentRepository.findByCodeReviewer(user);
+        }
         return assignmentRepository.findByUser(user);
     }
 

@@ -5,12 +5,24 @@ import Assignment from "./components/Assignment";
 import Dashboard from "./Dashboard";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
+import jwt_decode from "jwt-decode";
 import PrivateRoute from "./PrivateRoute";
 import fetchService from "./services/fetchService";
+import CodeReviewDashboard from "./components/CodeReviewDashboard";
+import CodeReviewAssignment from "./components/CodeReviewAssignment";
 import useLocalState from "./useLocalStorage";
 
 function App() {
   const [token, setToken] = useLocalState("", "jwt");
+  const [roles, setRoles] = useState(getRoleFromJwt());
+
+  function getRoleFromJwt() {
+    if (token) {
+      const decodedJwt = jwt_decode(token);
+      return decodedJwt.authorities;
+    }
+    return [];
+  }
   useEffect(() => {
     console.log("hello");
     if (!token) {
@@ -40,17 +52,29 @@ function App() {
           <Route
             path="/dashboard"
             element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
+              roles && roles.find((role) => role === "ROLE_CODE_REVIEWER") ? (
+                <PrivateRoute>
+                  <CodeReviewDashboard />
+                </PrivateRoute>
+              ) : (
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              )
             }
           />
           <Route
             path="/assignments/:id"
             element={
-              <PrivateRoute>
-                <Assignment />
-              </PrivateRoute>
+              roles && roles.find((role) => role === "ROLE_CODE_REVIEWER") ? (
+                <PrivateRoute>
+                  <CodeReviewAssignment />
+                </PrivateRoute>
+              ) : (
+                <PrivateRoute>
+                  <Assignment />
+                </PrivateRoute>
+              )
             }
           />
           <Route path="/hello" element={<HomePage />} />

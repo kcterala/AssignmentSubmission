@@ -20,8 +20,10 @@ public class Assignment {
     private String githubUrl;
     private String codeReviewVideoUrl;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private User user;
-//    private User assignedTo;
+
+    @ManyToOne
+    private User codeReviewer;
 
 }

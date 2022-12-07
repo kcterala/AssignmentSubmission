@@ -145,7 +145,51 @@ const Assignment = () => {
               />
             </Col>
           </Form.Group>
-          <div className="d-flex gap-5">
+
+          {assignment.status === "Completed" ? (
+            <>
+              <div>
+                <Form.Group
+                  as={Row}
+                  className="d-flex align-items-center mb-3"
+                  controlId="codeReviewVideoUrl"
+                >
+                  <Form.Label column sm="3" md="2">
+                    Code Review Video URL
+                  </Form.Label>
+                  <Col sm="9" md="8" lg="6">
+                    <a href={assignment.codeReviewVideoUrl}>
+                      {assignment.codeReviewVideoUrl}
+                    </a>
+                  </Col>
+                </Form.Group>
+              </div>
+
+              <div className="d-flex gap-5">
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    window.location.href = "/";
+                  }}
+                >
+                  Back
+                </Button>
+              </div>
+            </>
+          ) : (
+            <div className="d-flex gap-5">
+              <Button onClick={() => save()}>Submit Assignment</Button>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  window.location.href = "/";
+                }}
+              >
+                Back
+              </Button>
+            </div>
+          )}
+          {/* <div className="d-flex gap-5">
             <Button onClick={() => save()}>Submit Assignment</Button>
             <Button
               variant="secondary"
@@ -155,7 +199,7 @@ const Assignment = () => {
             >
               Back
             </Button>
-          </div>
+          </div> */}
         </>
       ) : (
         <></>
