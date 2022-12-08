@@ -1,11 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import fetchService from "../services/fetchService";
 import useLocalState from "../useLocalStorage";
-import { Button, Card, Badge, Row, Col } from "react-bootstrap";
+import { Button, Card, Row, Col } from "react-bootstrap";
+import StatusBadge from "../components/StatusBadge";
 
 const Dashboard = () => {
+  let navigate = useNavigate();
   const [jwt, setJwt] = useLocalState("", "jwt");
   const [assignments, setAssignments] = useState(null);
 
@@ -18,7 +20,7 @@ const Dashboard = () => {
   function createAssignment() {
     fetchService("http://localhost:8080/api/assignments", "post", jwt).then(
       (assignment) => {
-        window.location.href = `/assignments/${assignment.id}`;
+        navigate(`/assignments/${assignment.id}`);
       }
     );
   }
@@ -31,7 +33,7 @@ const Dashboard = () => {
             style={{ cursor: "pointer" }}
             onClick={() => {
               setJwt(null);
-              window.location.href = "/login";
+              navigate("/login");
             }}
           >
             Logout
@@ -55,14 +57,7 @@ const Dashboard = () => {
               <Card.Body className="d-flex flex-column justify-content-around">
                 <Card.Title>Assignment #{assignment.number}</Card.Title>
                 <div className="d-flex align-items-start">
-                  <Badge
-                    bg={
-                      assignment.status === "Completed" ? "success" : "danger"
-                    }
-                    style={{ fontSize: "1rem" }}
-                  >
-                    {assignment.status}
-                  </Badge>
+                  <StatusBadge text={assignment.status} />
                 </div>
 
                 <Card.Text>
@@ -75,9 +70,7 @@ const Dashboard = () => {
                 </Card.Text>
                 <Button
                   variant="secondary"
-                  onClick={() =>
-                    (window.location.href = `/assignments/${assignment.id}`)
-                  }
+                  onClick={() => navigate(`/assignments/${assignment.id}`)}
                 >
                   Edit
                 </Button>

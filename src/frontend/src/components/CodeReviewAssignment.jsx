@@ -6,10 +6,11 @@ import fetchService from "../services/fetchService";
 import useLocalState from "../useLocalStorage";
 import { Form, Col, Row, DropdownButton } from "react-bootstrap";
 import { useRef } from "react";
-import StatusBadge from "./StatusBadge";
 import { useNavigate } from "react-router-dom";
+import StatusBadge from "./StatusBadge";
 
-const Assignment = () => {
+const CodeReviewAssignment = () => {
+  let navigate = useNavigate();
   const assignmentId = window.location.href.split("/assignments/")[1];
   const [jwt, setJwt] = useLocalState("", "jwt");
   const [assignment, setAssignment] = useState({
@@ -20,7 +21,6 @@ const Assignment = () => {
   });
   const [assignmentEnums, setAssignmentEnums] = useState([]);
   const [assignmentStatuses, setAssignmentStatuses] = useState([]);
-  let navigate = useNavigate();
 
   useEffect(() => {
     fetchService(
@@ -38,7 +38,6 @@ const Assignment = () => {
   }, []);
 
   const prevAssignmentValue = useRef(assignment);
-  // (prevAssignmentValue);
 
   function updateAssignment(prop, value) {
     const newAssignment = { ...assignment };
@@ -52,6 +51,7 @@ const Assignment = () => {
     } else {
       persist();
     }
+    // .then(navigate("/"));
   }
 
   function persist() {
@@ -118,11 +118,12 @@ const Assignment = () => {
             <Col sm="9" md="8" lg="6">
               <Form.Control
                 type="url"
+                readOnly
                 onChange={(event) =>
                   updateAssignment("githubUrl", event.target.value)
                 }
                 value={assignment.githubUrl}
-                defaultValue="http://github.com/username/repo-name"
+                placeholder="http://github.com/username/repo-name"
               />
             </Col>
           </Form.Group>
@@ -133,84 +134,64 @@ const Assignment = () => {
             <Col sm="9" md="8" lg="6">
               <Form.Control
                 type="text"
+                readOnly
                 value={assignment.branch}
                 onChange={(e) => updateAssignment("branch", e.target.value)}
-                defaultValue="#branchname"
+                placeholder="#branchname"
               />
             </Col>
           </Form.Group>
-
-          {assignment.status === "Completed" ? (
-            <>
-              <div>
-                <Form.Group
-                  as={Row}
-                  className="d-flex align-items-center mb-3"
-                  controlId="codeReviewVideoUrl"
-                >
-                  <Form.Label column sm="3" md="2">
-                    Code Review Video URL
-                  </Form.Label>
-                  <Col sm="9" md="8" lg="6">
-                    <a href={assignment.codeReviewVideoUrl}>
-                      {assignment.codeReviewVideoUrl}
-                    </a>
-                  </Col>
-                </Form.Group>
-              </div>
-
-              <div className="d-flex gap-5">
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    navigate("/dashboard");
-                  }}
-                >
-                  Back
-                </Button>
-              </div>
-            </>
-          ) : assignment.status === "Pending Submission" ? (
-            <div className="d-flex gap-5">
-              <Button onClick={() => save("Submitted")}>
-                Submit Assignment
+          <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+            <Form.Label column sm="3" md="2">
+              Video Review URL
+            </Form.Label>
+            <Col sm="9" md="8" lg="6">
+              <Form.Control
+                type="text"
+                value={assignment.codeReviewVideoUrl}
+                onChange={(e) =>
+                  updateAssignment("codeReviewVideoUrl", e.target.value)
+                }
+                placeholder="https://youtube.com/"
+              />
+            </Col>
+          </Form.Group>
+          <div className="d-flex gap-5">
+            {assignment.status === "Completed" ? (
+              <Button onClick={() => save(assignmentStatuses[2].status)}>
+                Re-Claim
               </Button>
+            ) : (
+              <Button onClick={() => save(assignmentStatuses[4].status)}>
+                Complete Review
+              </Button>
+            )}
+
+            {assignment.status === "Needs Update" ? (
               <Button
                 variant="secondary"
-                onClick={() => {
-                  navigate("/dashboard");
-                }}
+                onClick={() => save(assignmentStatuses[2].status)}
               >
-                Back
+                Re-Claim
               </Button>
-            </div>
-          ) : (
-            <div className="d-flex gap-5">
-              <Button onClick={() => save("Resubmitted")}>
-                {" "}
-                Re-Submit Assignment
-              </Button>
+            ) : (
               <Button
-                variant="secondary"
-                onClick={() => {
-                  navigate("/dashboard");
-                }}
+                variant="danger"
+                onClick={() => save(assignmentStatuses[3].status)}
               >
-                Back
+                Reject Assignment
               </Button>
-            </div>
-          )}
-          {/* <div className="d-flex gap-5">
-            <Button onClick={() => save()}>Submit Assignment</Button>
+            )}
+
             <Button
               variant="secondary"
               onClick={() => {
-                 navigate("/")
+                navigate("/dashboard");
               }}
             >
               Back
             </Button>
-          </div> */}
+          </div>
         </>
       ) : (
         <></>
@@ -219,4 +200,4 @@ const Assignment = () => {
   );
 };
 
-export default Assignment;
+export default CodeReviewAssignment;

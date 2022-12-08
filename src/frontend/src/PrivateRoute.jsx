@@ -15,7 +15,7 @@ const PrivateRoute = ({ children }) => {
       "get",
       token
     ).then((isValid) => {
-      console.log(isValid);
+      isValid;
       setIsValid(isValid);
       setIsLoading(false);
     });

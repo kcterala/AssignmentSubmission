@@ -24,7 +24,6 @@ function App() {
     return [];
   }
   useEffect(() => {
-    console.log("hello");
     if (!token) {
       const reqBody = {
         username: "kcterala",
