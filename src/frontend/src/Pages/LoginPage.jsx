@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useState } from "react";
 import { Button, Col, Container, Row, Form } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useUser } from "../components/UserProvider";
 import useLocalState from "../useLocalStorage";
 function LoginPage() {
+  const user = useUser();
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const [jwt, setJwt] = useLocalState("", "jwt");
-
+  // const [jwt, setJwt] = useLocalState("", "jwt");
+  // useEffect(() => {
+  //   if (user.jwt) navigate("/dashboard");
+  // }, [user]);
   function sendLoginRequest() {
     const reqBody = {
       username: username,
@@ -27,7 +31,7 @@ function LoginPage() {
       .then((res) => Promise.all([res.json(), res.headers]))
       .then(([body, data]) => {
         const token = data.get("authorization");
-        setJwt(token);
+        user.setJwt(token);
         window.location.href = "/dashboard";
       });
   }

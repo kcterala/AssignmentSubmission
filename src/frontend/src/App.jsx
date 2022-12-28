@@ -11,20 +11,22 @@ import fetchService from "./services/fetchService";
 import CodeReviewDashboard from "./components/CodeReviewDashboard";
 import CodeReviewAssignment from "./components/CodeReviewAssignment";
 import useLocalState from "./useLocalStorage";
+import { UserProvider, useUser } from "./components/UserProvider";
 
 function App() {
-  const [token, setToken] = useLocalState("", "jwt");
+  // const [token, setToken] = useLocalState("", "jwt");
+  const user = useUser();
   const [roles, setRoles] = useState(getRoleFromJwt());
 
   function getRoleFromJwt() {
-    if (token) {
-      const decodedJwt = jwt_decode(token);
+    if (user.jwt) {
+      const decodedJwt = jwt_decode(user.jwt);
       return decodedJwt.authorities;
     }
     return [];
   }
   useEffect(() => {
-    if (!token) {
+    if (!user.jwt) {
       const reqBody = {
         username: "kcterala",
         password: "asdfasdf",
@@ -39,7 +41,7 @@ function App() {
         .then((res) => Promise.all([res.json(), res.headers]))
         .then(([body, data]) => {
           const token = data.get("authorization");
-          setToken(token);
+          user.setJwt(token);
         });
     }
   }, []);

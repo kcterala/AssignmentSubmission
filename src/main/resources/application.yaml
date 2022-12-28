@@ -13,6 +13,10 @@ spring:
     filter:
       order: 10
 
+  server:
+    tomcat:
+      relaxed-query-chars: ['{','}']
+
 
 jwt:
   secret: hellojustsomething

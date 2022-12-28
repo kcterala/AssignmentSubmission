@@ -6,14 +6,16 @@ import useLocalState from "../useLocalStorage";
 import StatusBadge from "./StatusBadge";
 import jwt_decode from "jwt-decode";
 import { Button, Card, Badge, Row, Col, Container } from "react-bootstrap";
+import { useUser } from "./UserProvider";
 
 export default function CodeReviewDashboard() {
   let navigate = useNavigate();
-  const [jwt, setJwt] = useLocalState("", "jwt");
+  // const [jwt, setJwt] = useLocalState("", "jwt");
+  const user = useUser();
   const [assignments, setAssignments] = useState(null);
 
   useEffect(() => {
-    fetchService("http://localhost:8080/api/assignments", "get", jwt).then(
+    fetchService("http://localhost:8080/api/assignments", "get", user.jwt).then(
       (assignmentsData) => {
         console.log(assignmentsData);
         setAssignments(assignmentsData);
@@ -22,7 +24,7 @@ export default function CodeReviewDashboard() {
   }, []);
 
   function claimAssignment(assignment) {
-    const decodedJwt = jwt_decode(jwt);
+    const decodedJwt = jwt_decode(user.jwt);
     const user = {
       username: decodedJwt.sub,
       authorities: decodedJwt.authorities,
@@ -33,7 +35,7 @@ export default function CodeReviewDashboard() {
     fetchService(
       `http://localhost:8080/api/assignments/${assignment.id}`,
       "put",
-      jwt,
+      user.jwt,
       assignment
     ).then((updatedAssignment) => {
       const assignmentsCopy = [...assignments];
@@ -55,7 +57,7 @@ export default function CodeReviewDashboard() {
             className="d-flex justify-content-end"
             style={{ cursor: "pointer" }}
             onClick={() => {
-              setJwt(null);
+              user.setJwt(null);
               navigate("/login");
             }}
           >

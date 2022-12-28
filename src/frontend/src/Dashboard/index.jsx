@@ -5,24 +5,29 @@ import fetchService from "../services/fetchService";
 import useLocalState from "../useLocalStorage";
 import { Button, Card, Row, Col } from "react-bootstrap";
 import StatusBadge from "../components/StatusBadge";
+import { useUser } from "../components/UserProvider";
 
 const Dashboard = () => {
   let navigate = useNavigate();
-  const [jwt, setJwt] = useLocalState("", "jwt");
+  // const [user.jwt, setuser.Jwt] = useLocalState("", "user.jwt");
+  const user = useUser();
   const [assignments, setAssignments] = useState(null);
 
   useEffect(() => {
-    fetchService("http://localhost:8080/api/assignments", "get", jwt).then(
+    fetchService("http://localhost:8080/api/assignments", "get", user.jwt).then(
       (assignmentsData) => setAssignments(assignmentsData)
     );
-  }, []);
+    if (!user.jwt) navigate("/login");
+  }, [user.jwt]);
 
   function createAssignment() {
-    fetchService("http://localhost:8080/api/assignments", "post", jwt).then(
-      (assignment) => {
-        navigate(`/assignments/${assignment.id}`);
-      }
-    );
+    fetchService(
+      "http://localhost:8080/api/assignments",
+      "post",
+      user.jwt
+    ).then((assignment) => {
+      navigate(`/assignments/${assignment.id}`);
+    });
   }
   return (
     <div style={{ margin: "2rem" }}>
@@ -32,7 +37,7 @@ const Dashboard = () => {
             className="d-flex justify-content-end"
             style={{ cursor: "pointer" }}
             onClick={() => {
-              setJwt(null);
+              user.setJwt(null);
               navigate("/login");
             }}
           >
