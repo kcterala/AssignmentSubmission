@@ -1,6 +1,7 @@
 package com.kcterala.AssigmentSubmissionApp.repository;
 
 import com.kcterala.AssigmentSubmissionApp.entity.Assignment;
+import com.kcterala.AssigmentSubmissionApp.entity.Comment;
 import com.kcterala.AssigmentSubmissionApp.entity.User;
 import com.kcterala.AssigmentSubmissionApp.enums.AssignmentStatusEnum;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -25,11 +25,11 @@ export default function CodeReviewDashboard() {
 
   function claimAssignment(assignment) {
     const decodedJwt = jwt_decode(user.jwt);
-    const user = {
+    const u = {
       username: decodedJwt.sub,
       authorities: decodedJwt.authorities,
     };
-    assignment.codeReviewer = user;
+    assignment.codeReviewer = u;
     assignment.status = "In Review";
 
     fetchService(

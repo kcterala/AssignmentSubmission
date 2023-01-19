@@ -6,13 +6,16 @@ import fetchService from "../services/fetchService";
 import useLocalState from "../useLocalStorage";
 import { Form, Col, Row, DropdownButton } from "react-bootstrap";
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import StatusBadge from "./StatusBadge";
+import { useUser } from "./UserProvider";
 
 const CodeReviewAssignment = () => {
   let navigate = useNavigate();
-  const assignmentId = window.location.href.split("/assignments/")[1];
-  const [jwt, setJwt] = useLocalState("", "jwt");
+  const { assignmentId } = useParams();
+
+  // const [jwt, setJwt] = useLocalState("", "jwt");
+  const user = useUser();
   const [assignment, setAssignment] = useState({
     branch: "",
     githubUrl: "",
@@ -21,12 +24,17 @@ const CodeReviewAssignment = () => {
   });
   const [assignmentEnums, setAssignmentEnums] = useState([]);
   const [assignmentStatuses, setAssignmentStatuses] = useState([]);
+  const [comment, setComment] = useState({
+    text: "",
+    assignmentId: assignmentId != null ? parseInt(assignmentId) : null,
+    user: user.jwt,
+  });
 
   useEffect(() => {
     fetchService(
       `http://localhost:8080/api/assignments/${assignmentId}`,
       "get",
-      jwt
+      user.jwt
     ).then((assignmentRes) => {
       let assignmentData = assignmentRes.assignment;
       if (assignmentData.branch === null) assignmentData.branch = "";
@@ -38,7 +46,29 @@ const CodeReviewAssignment = () => {
   }, []);
 
   const prevAssignmentValue = useRef(assignment);
+  useEffect(() => {
+    fetchService(
+      `http://localhost:8080/api/comments?assignmentId=${assignmentId}`,
+      "get",
+      user.jwt,
+      null
+    ).then((comments) => console.log(comments));
+  }, []);
 
+  function submitComment() {
+    fetchService(
+      `http://localhost:8080/api/comments`,
+      "post",
+      user.jwt,
+      comment
+    ).then((comment) => console.log(comment));
+  }
+
+  function updateComment(value) {
+    const commentCopy = { ...comment };
+    commentCopy.text = value;
+    setComment(commentCopy);
+  }
   function updateAssignment(prop, value) {
     const newAssignment = { ...assignment };
     newAssignment[prop] = value;
@@ -58,7 +88,7 @@ const CodeReviewAssignment = () => {
     fetchService(
       `http://localhost:8080/api/assignments/${assignmentId}`,
       "put",
-      jwt,
+      user.jwt,
       assignment
     ).then((data) => setAssignment(data));
   }
@@ -192,6 +222,14 @@ const CodeReviewAssignment = () => {
               Back
             </Button>
           </div>
+
+          <div className="mt-5">
+            <textarea
+              style={{ width: "100%", borderRadius: "0.25rem" }}
+              onChange={(e) => updateComment(e.target.value)}
+            ></textarea>
+          </div>
+          <Button onClick={() => submitComment()}>Post Comment</Button>
         </>
       ) : (
         <></>

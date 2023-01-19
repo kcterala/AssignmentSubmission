@@ -8,10 +8,12 @@ import { Form, Col, Row, DropdownButton } from "react-bootstrap";
 import { useRef } from "react";
 import StatusBadge from "./StatusBadge";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "./UserProvider";
 
 const Assignment = () => {
   const assignmentId = window.location.href.split("/assignments/")[1];
   const [jwt, setJwt] = useLocalState("", "jwt");
+  const user = useUser();
   const [assignment, setAssignment] = useState({
     branch: "",
     githubUrl: "",
@@ -20,6 +22,14 @@ const Assignment = () => {
   });
   const [assignmentEnums, setAssignmentEnums] = useState([]);
   const [assignmentStatuses, setAssignmentStatuses] = useState([]);
+
+  const [comment, setComment] = useState({
+    text: "",
+    assignmentId: assignmentId != null ? parseInt(assignmentId) : null,
+    user: user.jwt,
+  });
+
+  const [comments, setComments] = useState([]);
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -40,6 +50,35 @@ const Assignment = () => {
   const prevAssignmentValue = useRef(assignment);
   // (prevAssignmentValue);
 
+  //comments
+  useEffect(() => {
+    fetchService(
+      `http://localhost:8080/api/comments?assignmentId=${assignmentId}`,
+      "get",
+      user.jwt,
+      null
+    ).then((commentsData) => setComments(commentsData));
+  }, []);
+
+  function submitComment() {
+    fetchService(
+      `http://localhost:8080/api/comments`,
+      "post",
+      user.jwt,
+      comment
+    ).then((comment) => {
+      const commentsCopy = [...comments];
+      commentsCopy.push(comment);
+      setComments(commentsCopy);
+    });
+  }
+
+  function updateComment(value) {
+    const commentCopy = { ...comment };
+    commentCopy.text = value;
+    setComment(commentCopy);
+  }
+  //Assignments
   function updateAssignment(prop, value) {
     const newAssignment = { ...assignment };
     newAssignment[prop] = value;
@@ -211,6 +250,23 @@ const Assignment = () => {
               Back
             </Button>
           </div> */}
+          <div className="mt-5">
+            <textarea
+              style={{ width: "100%", borderRadius: "0.25rem" }}
+              onChange={(e) => updateComment(e.target.value)}
+            ></textarea>
+          </div>
+          <Button onClick={() => submitComment()}>Post Comment</Button>
+          <div className="mt-5">
+            {comments.map((comment) => (
+              <div>
+                <span style={{ fontWeight: "bold" }}>
+                  {comment.createdBy.name} :{" "}
+                </span>
+                {comment.text}
+              </div>
+            ))}
+          </div>
         </>
       ) : (
         <></>
