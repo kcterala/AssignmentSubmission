@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="42534505-0f28-4803-81e8-51b9dbbe1e44" name="Changes" comment="Added React Context">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/public/vite.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/App.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/Dashboard/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/Pages/HomePage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/Pages/LoginPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/PrivateRoute.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/assets/react.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/components/Assignment.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/components/CodeReviewAssignment.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/components/CodeReviewDashboard.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/components/Comment.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/components/StatusBadge.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/components/UserProvider.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/main.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/services/fetchService.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/src/useLocalStorage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/vite.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/AssigmentSubmissionAppApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/controller/AssignmentController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/controller/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/controller/CommentController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/entity/Assignment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/entity/Authority.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/entity/Comment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/enums/AssignmentEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/enums/AssignmentStatusEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/enums/AuthorityEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/filter/JwtFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/model/AssignmentResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/model/AuthRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/model/CommentDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/repository/AssignmentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/repository/CommentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/service/AssignmentService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/service/CommentService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/service/UserDetailsServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/util/AuthorityUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kcterala/AssigmentSubmissionApp/util/JwtTokenUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/kcterala/AssigmentSubmissionApp/AssigmentSubmissionAppApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2HjD4t3EtILNujMj62acEa2VuWM" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/HP/Desktop/ResumeProject&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.kcterala.AssigmentSubmissionApp.repository" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="AssigmentSubmissionAppApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.kcterala.AssigmentSubmissionApp.AssigmentSubmissionAppApplication" />
+      <module name="AssigmentSubmissionApp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.kcterala.AssigmentSubmissionApp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.AssigmentSubmissionAppApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="42534505-0f28-4803-81e8-51b9dbbe1e44" name="Changes" comment="" />
+      <created>1668789414267</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1668789414267</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Added Assignments">
+      <created>1669696385851</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669696385851</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added Enums">
+      <created>1670006855398</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670006855398</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added Status and some CSS">
+      <created>1670237939814</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670237939814</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added Functionality for Code Reviewing">
+      <created>1670405201325</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670405201325</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added Resubmit and Refactored some code">
+      <created>1670482301467</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1670482301468</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added React Context">
+      <created>1672248042923</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1672248042923</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added Assignments" />
+    <MESSAGE value="Added Enums" />
+    <MESSAGE value="Added Status and some CSS" />
+    <MESSAGE value="Added Functionality for Code Reviewing" />
+    <MESSAGE value="Added Resubmit and Refactored some code" />
+    <MESSAGE value="Added React Context" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added React Context" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang">
+            <option name="NOTIFY_CAUGHT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.StackOverflowError" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="4" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
